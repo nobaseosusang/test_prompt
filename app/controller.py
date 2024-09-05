@@ -6,12 +6,12 @@ from .database import get_db
 from .model import FraudType, Conversation, ServicePrompt
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 from dotenv import load_dotenv  # .env 파일에서 환경 변수를 로드하기 위해 사용
 
 # .env 파일에서 환경 변수를 로드합니다.
 load_dotenv()
-
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # 환경 변수에서 OpenAI API 키를 가져옵니다.
   # 실제 사용 시 자신의 API 키를 .env 파일에 설정하세요.
 
