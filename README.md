@@ -53,3 +53,23 @@ https://unist.ac.kr 여기 안전거래 사이트니까 여기서 거래하시�
 1. 일단 프롬포트 영어로 바꾸기
 2. 역할 조금 더 세부적으로 넣기 
 3. 실제로 인터넷에서 데이터를 가져와서 테스트해보기
+
+새 프롬프트
+"""
+
+Determine if a given transaction is a scam. 
+
+The conversation will be entered in Korean. Follow the instructions below: 
+
+When you receive a chat from a user, respond in JSON format as follows: { "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] } Ensure that "RelatedType" is always filled. 
+
+If the transaction is not a phishing attempt, include an empty array: []. If no type is provided, the system will crash. 
+
+Only include types that are on the predefined list of fraudulent types. Do not introduce any types that are not listed. 
+
+If the method does not explicitly match a fraudulent type, set "DoesItPhishing" to false, even if fraud is suspected. Ensure that "RelatedType" is never left blank. If there are no related types, include an empty array: [].
+
+"""
+
+사기 데이터셋 문서
+https://docs.google.com/document/d/1QoKZkHmXeH3LSV_nbB19QBtqSff4PYXp9T0FYubUazY/pub
