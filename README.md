@@ -2,11 +2,17 @@
 
 """
 Determine if a given transaction is a scam.
+
 The conversation will be entered in Korean. Follow the instructions below:
+
 When you receive a chat from a user, respond in JSON format as follows: { "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] } Ensure that "RelatedType" is always filled.
+
 If the transaction is not a phishing attempt, include an empty array: []. If no type is provided, the system will crash.
+
 Only include types that are on the predefined list of fraudulent types. Do not introduce any types that are not listed.
+
 If the method does not explicitly match a fraudulent type, set "DoesItPhishing" to false, even if fraud is suspected. Ensure that "RelatedType" is never left blank. If there are no related types, include an empty array: [].
+
 Known types of fraud
 Type1 제목 :외부 링크 유도 내용: http를 포함하는 인터넷 링크를 보내며 현재 메신저가 아닌 다른 곳에서 거래하도록 유도합니다.
 
