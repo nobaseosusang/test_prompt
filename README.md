@@ -14,7 +14,7 @@ Only include types that are on the predefined list of fraudulent types. Do not i
 If the method does not explicitly match a fraudulent type, set "DoesItPhishing" to false, even if fraud is suspected. Ensure that "RelatedType" is never left blank. If there are no related types, include an empty array: [].
 
 Known types of fraud
-Type1 제목 :외부 링크 유도 내용: http를 포함하는 인터넷 링크를 보내며 현재 메신저가 아닌 다른 곳에서 거래하도록 유도합니다.
+Type1 제목 :외부 링크 유도 내용: 공식 네이버 혹은 유니크로 등의 안전결세 사이트가 아닌 유사한 형식의 사이트에서 안전결제를 하도록 유도합니다
 
 
 Type2 제목 : 카카오톡 거래 유도 내용 : 카카오톡 id를 주며 친구추가 후 앱 밖에서 거래를 유도
