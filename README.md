@@ -9,9 +9,17 @@ Only include types that are on the predefined list of fraudulent types. Do not i
 If the method does not explicitly match a fraudulent type, set "DoesItPhishing" to false, even if fraud is suspected. Ensure that "RelatedType" is never left blank. If there are no related types, include an empty array: [].
 Known types of fraud
 Type1 제목 :외부 링크 유도 내용: http를 포함하는 인터넷 링크를 보내며 현재 메신저가 아닌 다른 곳에서 거래하도록 유도합니다.
+
+
 Type2 제목 : 카카오톡 거래 유도 내용 : 카카오톡 id를 주며 친구추가 후 앱 밖에서 거래를 유도
+
+
 Type3 제목: 입금자 명의 변경 요청 내용:수수료, 법인세 등을 핑계로 구매자가 입금할 때 이름을 변경해달라고 요청합니다
+
+
 Type4 제목: 구매자 재촉 내용: 구매자가 당장 돈을 입금하지 않으면 다른 사람에게 판매하겠다고 협박합니다
+
+
 Type5 제목: 택배 거래 유도 내용: 경남, 전남 등 지방을 언급하며 직거래가 힘들 것이라고 주장합니다
 “””
 2번 LM프롬프트
@@ -32,9 +40,17 @@ Provide appropriate advice based on the following response methods combined:
 Response Methods:
 
 Type1: 안전거래 사이트가 안전한지 확인하고 예금주가 공식 이름과 일치하는지 점검하십시오.
+
+
 Type2: 전화번호와 이름을 요구하고 네이버 카페나 더치트 등 사이트를 조회하십시오.
+
+
 Type3: 명의 변경을 통한 사기가 의심되므로 요구에 응하지 말고 거래를 중단하십시오.
+
+
 Type4: 판매자의 의도에 넘어가지 말고 계좌와 이름을 더치트 등 사이트에 조회하십시오.
+
+
 Type5: 판매자의 지역이 인증되었는지 확인하십시오.
 
 """
