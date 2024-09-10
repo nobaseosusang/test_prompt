@@ -1,75 +1,40 @@
-# test_prompt
-
-.env를 만들어서 api key를 입력해줘야 해요
-
-ex) OPENAI_API_KEY="your api key"
-
-테스트 결과 제일 적절한 프롬프트는
+1번 LM 프롬프트
 
 """
-당신은 중고 거래 사기 여부를 판단합니다. 지시사항은 다음과 같습니다
-
-0.json 이외의 응답을 절대 하지 마십시오 
-
-1.사용자에게 채팅 내용을 입력받으면 답변을 json의 형태로 만드십시오 형태는 다음과 같습니다 {”피싱여부” : True or False, “관련 유형"(True 일때만) : [”type1(적절히 변경)”, …]} 
-
-2. 사기 유형 목록에 없는 유형으로는 대답하지 마십시오.
-
-3. 사기 유형에 없는 방법이라면 사기가 의심되어도 피싱 여부는 False입니다
-""""
-
-이러면 적어도 딴짓은 안했던 것 같아요
-
-지금 사용하는 프롬프트가 대충
-
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": f"현재 알려진 사기 유형: {fraud_types_text}. {prompt_text}"},
-                {"role": "user", "content": conversation}
-            ]
-        )
-
-이렇게 생겼는데 사기 타입에 맞는 대화는 어떻게 넣어줘야 할지 잘 모르겠어요
-
-***예시 입출력***
-
-2. Type2 제목 :외부 링크 유도 내용: http를 포함하는 인터넷 링크를 보내며 현재 메신저가 아닌 다른 곳에서 거래하도록 유도합니다. 
-1. Type1 제목 : 카카오톡 유도 내용 : 카카오톡 id를 주며 친구추가 후 앱 밖에서 거래를 유도
-
-
-계좌를 내놓거라
-{ "피싱여부": false }
-
-카카오톡 nobaseosusang 친추 ㄱ
-{"피싱여부": True, "관련 유형": ["Type1"]}
-
-https://unist.ac.kr 여기 안전거래 사이트니까 여기서 거래하시죠
-{"피싱여부": True, "관련 유형": ["Type2"]}
-
-9.6
-
-## TODO
-1. 일단 프롬포트 영어로 바꾸기
-2. 역할 조금 더 세부적으로 넣기 
-3. 실제로 인터넷에서 데이터를 가져와서 테스트해보기
-
-새 프롬프트
-"""
-
-Determine if a given transaction is a scam. 
-
-The conversation will be entered in Korean. Follow the instructions below: 
-
-When you receive a chat from a user, respond in JSON format as follows: { "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] } Ensure that "RelatedType" is always filled. 
-
-If the transaction is not a phishing attempt, include an empty array: []. If no type is provided, the system will crash. 
-
-Only include types that are on the predefined list of fraudulent types. Do not introduce any types that are not listed. 
-
+Determine if a given transaction is a scam.
+The conversation will be entered in Korean. Follow the instructions below:
+When you receive a chat from a user, respond in JSON format as follows: { "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] } Ensure that "RelatedType" is always filled.
+If the transaction is not a phishing attempt, include an empty array: []. If no type is provided, the system will crash.
+Only include types that are on the predefined list of fraudulent types. Do not introduce any types that are not listed.
 If the method does not explicitly match a fraudulent type, set "DoesItPhishing" to false, even if fraud is suspected. Ensure that "RelatedType" is never left blank. If there are no related types, include an empty array: [].
+Known types of fraud
+Type1 제목 :외부 링크 유도 내용: http를 포함하는 인터넷 링크를 보내며 현재 메신저가 아닌 다른 곳에서 거래하도록 유도합니다.
+Type2 제목 : 카카오톡 거래 유도 내용 : 카카오톡 id를 주며 친구추가 후 앱 밖에서 거래를 유도
+Type3 제목: 입금자 명의 변경 요청 내용:수수료, 법인세 등을 핑계로 구매자가 입금할 때 이름을 변경해달라고 요청합니다
+Type4 제목: 구매자 재촉 내용: 구매자가 당장 돈을 입금하지 않으면 다른 사람에게 판매하겠다고 협박합니다
+Type5 제목: 택배 거래 유도 내용: 경남, 전남 등 지방을 언급하며 직거래가 힘들 것이라고 주장합니다
+“””
+2번 LM프롬프트
 
 """
 
-사기 데이터셋 문서
-https://docs.google.com/document/d/1QoKZkHmXeH3LSV_nbB19QBtqSff4PYXp9T0FYubUazY/pub
+Prompt:
+
+Scam information is provided as follows:
+
+json
+{ "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] }
+
+If DoesItPhishing is false, output "현재 의심되는 사기 수법이 없습니다."
+
+Provide appropriate advice based on the following response methods combined:
+
+Response Methods:
+
+Type1: 안전거래 사이트가 안전한지 확인하고 예금주가 공식 이름과 일치하는지 점검하십시오.
+Type2: 전화번호와 이름을 요구하고 네이버 카페나 더치트 등 사이트를 조회하십시오.
+Type3: 명의 변경을 통한 사기가 의심되므로 요구에 응하지 말고 거래를 중단하십시오.
+Type4: 판매자의 의도에 넘어가지 말고 계좌와 이름을 더치트 등 사이트에 조회하십시오.
+Type5: 판매자의 지역이 인증되었는지 확인하십시오.
+
+"""
