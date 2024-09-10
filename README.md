@@ -22,35 +22,16 @@ Type4 제목: 구매자 재촉 내용: 구매자가 당장 돈을 입금하지 �
 
 Type5 제목: 택배 거래 유도 내용: 경남, 전남 등 지방을 언급하며 직거래가 힘들 것이라고 주장합니다
 “””
+
 2번 LM프롬프트
 
 """
+Scam information is provided as follows: json { "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] } 
 
-Prompt:
+If DoesItPhishing is false, output "현재 의심되는 사기 수법이 없습니다." 
 
-Scam information is provided as follows:
+Provide appropriate advice based on the following response methods combined. Make your own sentences combining them: Response Methods: 
 
-json
-{ "DoesItPhishing": true or false, "RelatedType": ["Type1", ...] }
-
-If DoesItPhishing is false, output "현재 의심되는 사기 수법이 없습니다."
-
-Provide appropriate advice based on the following response methods combined:
-
-Response Methods:
-
-Type1: 안전거래 사이트가 안전한지 확인하고 예금주가 공식 이름과 일치하는지 점검하십시오.
-
-
-Type2: 전화번호와 이름을 요구하고 네이버 카페나 더치트 등 사이트를 조회하십시오.
-
-
-Type3: 명의 변경을 통한 사기가 의심되므로 요구에 응하지 말고 거래를 중단하십시오.
-
-
-Type4: 판매자의 의도에 넘어가지 말고 계좌와 이름을 더치트 등 사이트에 조회하십시오.
-
-
-Type5: 판매자의 지역이 인증되었는지 확인하십시오.
+Type1: 안전거래 사이트가 안전한지 확인하고 예금주가 공식 이름과 일치하는지 점검하십시오. Type2: 전화번호와 이름을 요구하고 네이버 카페나 더치트 등 사이트를 조회하십시오. Type3: 명의 변경을 통한 사기가 의심되므로 요구에 응하지 말고 거래를 중단하십시오. Type4: 판매자의 의도에 넘어가지 말고 계좌와 이름을 더치트 등 사이트에 조회하십시오. Type5: 판매자의 지역이 인증되었는지 확인하십시오.
 
 """
